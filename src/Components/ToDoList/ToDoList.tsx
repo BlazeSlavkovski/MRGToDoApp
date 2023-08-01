@@ -1,27 +1,27 @@
 import ToDo from '../ToDo/ToDo'
 import './ToDoList.scss'
 
-interface ToDoListElement {
+interface Task{
     title: string;
     description: string;
     completed: boolean;
-    id: string
+    id: string;
   }
 
 interface ToDoListProps {
     showModal: (param:string, complete:boolean) => void;
-    deleteToDoListElement: (param:string, complete:boolean) => void;
-    completeToDoListItem:(param:string) => void;
-    toDoListData: ToDoListElement[]
+    deleteTask: (param:string, complete:boolean) => void;
+    completeTask:(param:string) => void;
+    toDoList: Task[]
 }
 
 
 
-export default function ToDoList({showModal,toDoListData,deleteToDoListElement ,completeToDoListItem}:ToDoListProps){
+export default function ToDoList({showModal,toDoList,deleteTask ,completeTask}:ToDoListProps){
 
-    const toDoListItems = toDoListData.map((item) => {
+    const toDoListItems = toDoList.map((item) => {
         return(
-            <ToDo key={item.id} showModal={showModal} completeToDoListItem={completeToDoListItem} deleteToDoListElement={deleteToDoListElement} title={item.title} description={item.description} id={item.id} completed={item.completed}/>
+            <ToDo key={item.id} showModal={showModal} completeTask={completeTask} deleteTask={deleteTask} title={item.title} description={item.description} id={item.id} completed={item.completed}/>
         )
         
     })

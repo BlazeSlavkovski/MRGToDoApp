@@ -1,6 +1,6 @@
 import { useState,useEffect } from 'react'
 import './ToDoEditModal.scss'
-interface ToDoListElement {
+interface Task{
     title: string;
     description: string;
     completed: boolean;
@@ -8,17 +8,19 @@ interface ToDoListElement {
   }
 
 interface ToDoEditModalProps {
-    editModalData: ToDoListElement
-    editToDoListElement: (param: ToDoListElement,complete:boolean) => void
+    setEditModalTask: Task
+    editTask: (param: Task,complete:boolean) => void
 }
 
 
-export default function ToDoEditModal({editModalData,editToDoListElement} : ToDoEditModalProps){
-    const [toDoFormDataEdit, setToDoFormDataEdit] = useState(editModalData)
+export default function ToDoEditModal({setEditModalTask,editTask} : ToDoEditModalProps){
+    const [toDoFormDataEdit, setToDoFormDataEdit] = useState(setEditModalTask)
 
+    //this is neccessary because state doesnt update if props get updated 
+    //we updated the state explicitly to ensure it gets the proper data
     useEffect(()=>{
-        setToDoFormDataEdit(editModalData)
-    },[editModalData])
+        setToDoFormDataEdit(setEditModalTask)
+    },[setEditModalTask])
 
     const onChangeToDo = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         setToDoFormDataEdit((prevValue) => ({
@@ -26,11 +28,13 @@ export default function ToDoEditModal({editModalData,editToDoListElement} : ToDo
             [e.target.id]: e.target.value
         }))
     }
+
     return(
         
             <form className='todoInputFormEdit' onSubmit={(e)=>{
                 e.preventDefault()
-                editToDoListElement(toDoFormDataEdit,toDoFormDataEdit.completed)
+                console.log()
+                editTask(toDoFormDataEdit,toDoFormDataEdit.completed)
                 }}>
                         <label htmlFor='title' className="todoLabelEdit">Task Title</label>
                         <input type='text' id='title' placeholder='Name of Task (Required)' value={toDoFormDataEdit.title} onChange={onChangeToDo} className='todoInputEdit' required minLength={1}/>

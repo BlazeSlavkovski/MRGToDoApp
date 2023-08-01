@@ -8,18 +8,18 @@ const defaultFormData = {
     description: '',
     completed:false
 }
-interface ToDoListElement {
+interface Task{
     title: string;
     description: string;
     completed: boolean;
-    id: string
+    id: string;
   }
 
 interface ToDoFormProps {
-    addToDoListElement: (param:ToDoListElement) => void;
+    addTask: (param:Task) => void;
 }
 
-export default function ToDoForm({addToDoListElement}:ToDoFormProps){
+export default function ToDoForm({addTask}:ToDoFormProps){
     const [toDoFormData, setToDoFormData] = useState(defaultFormData)
 
     const onChangeToDo = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -29,10 +29,11 @@ export default function ToDoForm({addToDoListElement}:ToDoFormProps){
         }))
     }
 
+    //grabs the toDoFormData and adds a unique id that is used in the functions in App.tsx
     const submitToDo = (value: React.FormEvent<HTMLFormElement>) => {
         value.preventDefault()
         const id = uuidv4()
-        addToDoListElement({...toDoFormData, id:id })
+        addTask({...toDoFormData, id:id })
         setToDoFormData(defaultFormData)
     }
     return(

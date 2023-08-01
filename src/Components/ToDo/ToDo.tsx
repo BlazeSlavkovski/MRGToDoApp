@@ -4,8 +4,8 @@ import './ToDo.scss'
 interface ToDoProps {
     //this is the fcn that shows the edit Modal
     showModal: (param:string, complete:boolean) => void;
-    deleteToDoListElement: (param:string, complete:boolean) => void;
-    completeToDoListItem:(param:string) => void;
+    deleteTask: (param:string, complete:boolean) => void;
+    completeTask:(param:string) => void;
     title:string;
     description:string;
     id:string ;
@@ -13,7 +13,7 @@ interface ToDoProps {
 }
 
 
-export default function ToDo({showModal,title,description,deleteToDoListElement,completeToDoListItem,id,completed}:ToDoProps){
+export default function ToDo({showModal,title,description,deleteTask,completeTask,id,completed}:ToDoProps){
 
     return(
         <div className='toDoElement'>
@@ -23,10 +23,9 @@ export default function ToDo({showModal,title,description,deleteToDoListElement,
             </div>
             
             <div className='iconContainer'>
-                {completed === true? '':<div className='toDoElementIcon checkIcon' onClick={()=>completeToDoListItem(id)}/>}
-                
+                {completed === true? '':<div className='toDoElementIcon checkIcon' onClick={()=>completeTask(id)}/>}
                 <div className='toDoElementIcon editIcon'  onClick={()=>showModal(id,completed)} />
-                <div className='toDoElementIcon trashIcon' onClick={() => deleteToDoListElement(id,completed)}/>
+                <div className='toDoElementIcon trashIcon' onClick={() => deleteTask(id,completed)}/>
             </div>
         </div>
     )
