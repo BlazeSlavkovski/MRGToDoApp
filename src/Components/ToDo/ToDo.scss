@@ -1,0 +1,64 @@
+@use '../../Styles/Partials/resets';
+@use '../../Styles/Partials/mixins' as *;
+
+.toDoElement{
+    background-color: #CDCDCD;
+    border-radius: 2rem;
+    padding:1rem 1rem 1rem 1rem;
+    margin:1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+    
+    &Info{
+        width:60%;
+        margin-right:5px;
+    }
+
+    &Title{
+        margin:0;
+        font-size: 3rem;
+    }
+    &Description{
+        margin:0;
+        font-size: 1.6rem;
+        overflow-wrap: break-word;
+    }
+    &:hover{
+        opacity: 0.9;
+    }
+    &Icon{
+        height: 3rem;
+        width: 3rem;
+        background-position: center;
+        background-size: cover;
+    }
+}
+
+.checkIcon{
+    background-image: url('../../assets/icons8-check.svg');
+    &:hover{
+        background-image: url('../../assets/icons8-check-green.svg');
+    }
+}
+
+.editIcon{
+    background-image: url('../../assets/icons8-edit.svg');
+    &:hover{
+        background-image: url('../../assets/icons8-edit-orange.svg');
+    }
+}
+
+.trashIcon{
+    background-image: url('../../assets/icons8-trash.svg');
+    &:hover{
+        background-image: url('../../assets/icons8-trash-red.svg');
+    }
+}
+.iconContainer{
+    display:flex;
+    flex-direction: row;
+    gap:2rem
+}
+

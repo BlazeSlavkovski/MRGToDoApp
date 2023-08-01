@@ -1,0 +1,19 @@
+@use './variables' as *;
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  margin: 0;
+  font-family: 'Edu SA Beginner', 'cursive';
+  background-color: #fafafa;
+}

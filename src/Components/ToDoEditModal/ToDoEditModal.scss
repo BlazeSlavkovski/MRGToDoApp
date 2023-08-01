@@ -1,0 +1,56 @@
+@use '../../Styles/Partials/resets';
+@use '../../Styles/Partials/mixins' as *;
+
+.todoInputFormEdit{
+    display: flex;
+    flex-direction: column;
+}
+
+.todoLabelEdit{
+    font-size: 2rem;
+}
+
+.todoInputEdit{
+    margin-bottom: 1rem;
+    min-height: 3rem;
+    border: 1px solid #333;
+    border-radius: 2rem;
+    padding-left: 1rem;
+    &::placeholder{
+        font-family: 'Edu SA Beginner', 'cursive';
+        font-size: 1.6rem;
+    }
+    &Description{
+        border: 1px solid #333;
+        margin-bottom: 1rem;
+        min-height: 7rem;
+        width: 100%;
+        resize: none;
+        border-radius: 2rem;
+        padding-left: 1rem;
+        padding: 1rem 0 4rem 1rem;
+        overflow:hidden;
+        &::placeholder{
+            font-family: 'Edu SA Beginner', 'cursive';
+            font-size: 1.6rem;
+        }
+    }
+    &Submit{
+        padding: 1rem 0 1rem 0;
+        border-radius: 2rem;
+        border-width: 0.1rem;
+        font-family: 'Edu SA Beginner', 'cursive';
+        background-color: lightgray;
+        font-size: 2rem;
+        box-shadow: 0 5px #999;
+        cursor: pointer;
+        &:hover{
+            
+            background-color: #cdcdcd;
+        }
+        &:active{
+            box-shadow: 0 3px #666;
+            transform: translateY(3px);
+        }
+    }
+}

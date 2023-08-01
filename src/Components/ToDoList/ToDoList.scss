@@ -1,0 +1,29 @@
+@use '../../Styles/Partials/resets';
+@use '../../Styles/Partials/mixins' as *;
+
+.todoTitle{
+    margin:1.5rem 0 1.5rem 0;
+    font-size: 2.5rem;
+    text-align: center;
+    @include tablet{
+        font-size: 3rem;
+    }
+    @include desktop{
+        font-size: 3.5rem;
+    }
+}
+
+.containerToDoList{
+    width:100%;
+    @include tablet{
+        width:100%
+    }
+}
+
+.noTasksToDo{
+    margin:5rem auto;
+        text-align: center;
+        @include tablet{
+            margin:5rem 5rem;
+        }
+}

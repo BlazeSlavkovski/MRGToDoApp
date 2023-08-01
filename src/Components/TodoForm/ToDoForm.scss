@@ -1,0 +1,88 @@
+@use '../../Styles/Partials/resets';
+@use '../../Styles/Partials/mixins' as *;
+
+
+.container{
+    
+    width:100%;
+    @include tablet{
+        width:50%
+    }
+
+}
+
+.todoInputForm{
+    display: flex;
+    flex-direction: column;
+}
+
+.todoTitle{
+    margin:0 0 1.5rem 0;
+    font-size: 2.5rem;
+    text-align: center;
+    @include tablet{
+        font-size: 3rem;
+    }
+    @include desktop{
+        font-size: 3.5rem;
+    }
+}
+
+.todoLabel{
+    font-size: 2rem;
+}
+
+.todoInput{
+    margin-bottom: 1rem;
+    min-height: 3rem;
+    border: 1px solid #333;
+    border-radius: 2rem;
+    padding-left: 1rem;
+    &::placeholder{
+        font-family: 'Edu SA Beginner', 'cursive';
+        font-size: 1.6rem;
+    }
+    &Description{
+        border: 1px solid #333;
+        margin-bottom: 1rem;
+        min-height: 7rem;
+        width: 100%;
+        resize: none;
+        border-radius: 2rem;
+        padding-left: 1rem;
+        padding: 1rem 0 4rem 1rem;
+        overflow:hidden;
+        &::placeholder{
+            font-family: 'Edu SA Beginner', 'cursive';
+            font-size: 1.6rem;
+        }
+    }
+    &Submit{
+        padding: 1rem 0 1rem 0;
+        border-radius: 2rem;
+        border-width: 0.1rem;
+        font-family: 'Edu SA Beginner', 'cursive';
+        background-color: lightgray;
+        font-size: 2rem;
+        box-shadow: 0 5px #999;
+        cursor: pointer;
+        @include tablet{
+            width:30%;
+            margin-left: auto;
+        }
+        &:hover{
+            
+            background-color: #cdcdcd;
+        }
+        &:active{
+            box-shadow: 0 3px #666;
+            transform: translateY(3px);
+        }
+    }
+}
+
+
+
+
+
+
