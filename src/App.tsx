@@ -43,9 +43,9 @@ function App() {
   };
 
   const editToDoListElement = (toDoListElement: ToDoListElement,complete: boolean) => {
-    console.log(complete)
+    
     if(complete){
-      console.log('we are in completed')
+      
       setCompletedToDoList(
         completedToDoList.map((toDoListDataElement) => {
           if (toDoListDataElement.id === toDoListElement.id) {
@@ -73,7 +73,6 @@ function App() {
 
   const deleteToDoListElement = (idOfElement: string,complete: boolean) => {
     if(complete){
-      console.log('we are in delete for completed tasks')
       setCompletedToDoList((prevValue) =>
         prevValue.filter((element) => element.id != idOfElement)
       );
