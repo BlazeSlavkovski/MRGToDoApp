@@ -4,14 +4,14 @@ import {ToDoEditModalProps} from '../../Types/types'
 
 
 
-export default function ToDoEditModal({setEditModalTask,editTask} : ToDoEditModalProps){
-    const [toDoFormDataEdit, setToDoFormDataEdit] = useState(setEditModalTask)
+export default function ToDoEditModal({editModalTask,editTask} : ToDoEditModalProps){
+    const [toDoFormDataEdit, setToDoFormDataEdit] = useState(editModalTask)
 
     //this is neccessary because state doesnt update if props get updated 
     //we updated the state explicitly to ensure it gets the proper data
     useEffect(()=>{
-        setToDoFormDataEdit(setEditModalTask)
-    },[setEditModalTask])
+        setToDoFormDataEdit(editModalTask)
+    },[editModalTask])
 
     const onChangeToDo = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         setToDoFormDataEdit((prevValue) => ({
@@ -24,7 +24,7 @@ export default function ToDoEditModal({setEditModalTask,editTask} : ToDoEditModa
         
             <form className='todoInputFormEdit' onSubmit={(e)=>{
                 e.preventDefault()
-                editTask(toDoFormDataEdit,toDoFormDataEdit.completed)
+                editTask(toDoFormDataEdit)
                 }}>
                         <label htmlFor='title' className="todoLabelEdit">Task Title</label>
                         <input type='text' id='title' placeholder='Name of Task (Required)' value={toDoFormDataEdit.title} onChange={onChangeToDo} className='todoInputEdit' required minLength={1}/>

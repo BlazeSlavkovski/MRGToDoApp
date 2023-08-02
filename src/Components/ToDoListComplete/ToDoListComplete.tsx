@@ -2,10 +2,10 @@ import ToDo from '../ToDo/ToDo'
 import './ToDoListComplete.scss'
 import {ToDoListPropsComplete} from '../../Types/types'
 
-export default function ToDoListComplete({completedToDoList,deleteTask,showModal,completeTask}:ToDoListPropsComplete){
+export default function ToDoListComplete({completedToDoList,deleteTask,showEditingModal,completeTask}:ToDoListPropsComplete){
     const toDoListItemsComplete = completedToDoList?.map((item) => {
         return(
-            <ToDo key={item.id} showModal={showModal} completeTask={completeTask} deleteTask={deleteTask} title={item.title} description={item.description} id={item.id} completed={item.completed}/>
+            <ToDo key={item.id} showEditingModal={showEditingModal} completeTask={completeTask} deleteTask={deleteTask} title={item.title} description={item.description} id={item.id} completed={item.completed}/>
         )
     })
     return(

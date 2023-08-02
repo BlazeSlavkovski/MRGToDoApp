@@ -6,15 +6,15 @@ interface Task{
 }
 
 interface ToDoListProps {
-    showModal: (param:string, complete:boolean) => void;
-    deleteTask: (param:string, complete:boolean) => void;
+    showEditingModal: (param:string) => void;
+    deleteTask: (param:string) => void;
     completeTask:(param:string) => void;
     toDoList: Task[]
 }
 
 interface ToDoProps {
-    showModal: (param:string, complete:boolean) => void;
-    deleteTask: (param:string, complete:boolean) => void;
+    showEditingModal: (param:string) => void;
+    deleteTask: (param:string) => void;
     completeTask:(param:string) => void;
     title:string;
     description:string;
@@ -23,8 +23,8 @@ interface ToDoProps {
 }
 
 interface ToDoListPropsComplete {
-    showModal: (param:string, complete:boolean) => void;
-    deleteTask: (param:string, complete:boolean) => void;
+    showEditingModal: (param:string) => void;
+    deleteTask: (param:string) => void;
     completeTask:(param:string) => void;
     completedToDoList: Task[];
 }
@@ -34,8 +34,8 @@ interface ToDoFormProps {
 }
 
 interface ToDoEditModalProps {
-    setEditModalTask: Task;
-    editTask: (param: Task,complete:boolean) => void
+    editModalTask: Task;
+    editTask: (param: Task) => void
 }
 
 export type {Task,ToDoListProps,ToDoProps,ToDoListPropsComplete,ToDoFormProps,ToDoEditModalProps};
