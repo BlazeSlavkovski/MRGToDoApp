@@ -1,8 +1,6 @@
 import './ToDo.scss'
 import {ToDoProps} from '../../Types/types'
 
-
-
 export default function ToDo({showEditingModal,title,description,deleteTask,completeTask,id,completed}:ToDoProps){
 
     return(
@@ -11,7 +9,6 @@ export default function ToDo({showEditingModal,title,description,deleteTask,comp
                 <p className='toDoElementTitle'>{title}</p>
                 <p  className='toDoElementDescription'>{description}</p>
             </div>
-            
             <div className='iconContainer'>
                 {completed === true? '':<div className='toDoElementIcon checkIcon' onClick={()=>completeTask(id)}/>}
                 <div className='toDoElementIcon editIcon'  onClick={()=>showEditingModal(id)} />

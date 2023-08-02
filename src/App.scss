@@ -21,7 +21,6 @@
     &Lists{
         display: flex;
         flex-direction: column;
-        //flex-grow: 1;
         @include tablet{
             width:50%;
         }

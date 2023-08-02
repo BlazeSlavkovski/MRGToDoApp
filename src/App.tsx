@@ -10,27 +10,29 @@ import {Task} from './Types/types.ts'
 
 
 function App() {
-  const [showEditModal, setShowEditModal] = useState<boolean>(false);
   const [toDoList, setToDoList] = useState<Task[]>([]);
-  const [editModalTask, setEditModalTask] = useState<Task | undefined>();
+  const [editModalTask, setEditModalTask] = useState<Task | null>(null);
 
   //Show modal will bring up the editModal based on the id passed
-  //complete boolean is used to determine which dataset to grab the task from
   const showEditingModal = (taskId: string): void => {
+    const taskToEdit = toDoList.find((task) => task.id === taskId)
+    //a fallback in case the task somehow does not exist
+    if(!taskToEdit){
+      console.error('Task Not Found')
+      setEditModalTask(null)
+      return
+    }
     setEditModalTask(
-      toDoList.find((task) => task.id === taskId)
+      taskToEdit
     );
-    setShowEditModal(true);
   };
 
   //when the modal is hidden we need to reset the values of EditModalTask
   const hideModal = (): void => {
-    setEditModalTask(undefined)
-    setShowEditModal(false);
+    setEditModalTask(null)
   };
 
   //editTask will update the specific task based on its id
-  //complete boolean is used to ensure it looks in the proper dataset to place the new object
   const editTask = (updatedTask: Task) => {
     setToDoList(
       toDoList.map((existingTask) => {
@@ -40,7 +42,7 @@ function App() {
         return existingTask;
       })
     );
-    setShowEditModal(false);
+    setEditModalTask(null)
   };
 
   //adds a new task to the toDoList dataset
@@ -55,7 +57,6 @@ function App() {
     );
   };
 
-
   //this function updated the completed value of a specifc Task Object based on its taskId
   const completeTask = (taskId: string) => {
     const itemFound = toDoList.find((existingTask) => existingTask.id === taskId)
@@ -68,7 +69,6 @@ function App() {
         return existingTask;
       }))
     }
-    
   }
 
   return (
@@ -98,7 +98,7 @@ function App() {
       </div>
       {editModalTask && (
         <Rodal
-          visible={showEditModal}
+          visible={!!editModalTask}
           animation="slideUp"
           onClose={hideModal}
           height={260}

@@ -2,8 +2,6 @@ import { useState,useEffect } from 'react'
 import './ToDoEditModal.scss'
 import {ToDoEditModalProps} from '../../Types/types'
 
-
-
 export default function ToDoEditModal({editModalTask,editTask} : ToDoEditModalProps){
     const [toDoFormDataEdit, setToDoFormDataEdit] = useState(editModalTask)
 
@@ -21,7 +19,6 @@ export default function ToDoEditModal({editModalTask,editTask} : ToDoEditModalPr
     }
 
     return(
-        
             <form className='todoInputFormEdit' onSubmit={(e)=>{
                 e.preventDefault()
                 editTask(toDoFormDataEdit)
