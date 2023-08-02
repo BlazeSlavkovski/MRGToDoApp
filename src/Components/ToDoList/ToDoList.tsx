@@ -1,19 +1,7 @@
 import ToDo from '../ToDo/ToDo'
 import './ToDoList.scss'
+import { ToDoListProps } from '../../Types/types';
 
-interface Task{
-    title: string;
-    description: string;
-    completed: boolean;
-    id: string;
-  }
-
-interface ToDoListProps {
-    showModal: (param:string, complete:boolean) => void;
-    deleteTask: (param:string, complete:boolean) => void;
-    completeTask:(param:string) => void;
-    toDoList: Task[]
-}
 
 
 

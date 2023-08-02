@@ -1,19 +1,6 @@
 import ToDo from '../ToDo/ToDo'
 import './ToDoListComplete.scss'
-
-interface Task{
-    title: string;
-    description: string;
-    completed: boolean;
-    id: string;
-  }
-
-interface ToDoListPropsComplete {
-    showModal: (param:string, complete:boolean) => void;
-    deleteTask: (param:string, complete:boolean) => void;
-    completeTask:(param:string) => void;
-    completedToDoList: Task[]
-}
+import {ToDoListPropsComplete} from '../../Types/types'
 
 export default function ToDoListComplete({completedToDoList,deleteTask,showModal,completeTask}:ToDoListPropsComplete){
     const toDoListItemsComplete = completedToDoList?.map((item) => {

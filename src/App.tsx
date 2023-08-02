@@ -6,13 +6,8 @@ import ToDoListComplete from "./Components/ToDoListComplete/ToDoListComplete";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import "./App.scss";
+import {Task} from './Types/types.ts'
 
-interface Task{
-  title: string;
-  description: string;
-  completed: boolean;
-  id: string;
-}
 
 function App() {
   const [showEditModal, setShowEditModal] = useState<boolean>(false);

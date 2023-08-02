@@ -1,16 +1,6 @@
-
 import './ToDo.scss'
+import {ToDoProps} from '../../Types/types'
 
-interface ToDoProps {
-    //this is the fcn that shows the edit Modal
-    showModal: (param:string, complete:boolean) => void;
-    deleteTask: (param:string, complete:boolean) => void;
-    completeTask:(param:string) => void;
-    title:string;
-    description:string;
-    id:string ;
-    completed:boolean;
-}
 
 
 export default function ToDo({showModal,title,description,deleteTask,completeTask,id,completed}:ToDoProps){

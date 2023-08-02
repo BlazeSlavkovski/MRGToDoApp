@@ -1,16 +1,7 @@
 import { useState,useEffect } from 'react'
 import './ToDoEditModal.scss'
-interface Task{
-    title: string;
-    description: string;
-    completed: boolean;
-    id: string;
-  }
+import {ToDoEditModalProps} from '../../Types/types'
 
-interface ToDoEditModalProps {
-    setEditModalTask: Task
-    editTask: (param: Task,complete:boolean) => void
-}
 
 
 export default function ToDoEditModal({setEditModalTask,editTask} : ToDoEditModalProps){
@@ -33,7 +24,6 @@ export default function ToDoEditModal({setEditModalTask,editTask} : ToDoEditModa
         
             <form className='todoInputFormEdit' onSubmit={(e)=>{
                 e.preventDefault()
-                console.log()
                 editTask(toDoFormDataEdit,toDoFormDataEdit.completed)
                 }}>
                         <label htmlFor='title' className="todoLabelEdit">Task Title</label>

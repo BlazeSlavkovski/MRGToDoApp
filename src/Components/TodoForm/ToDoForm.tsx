@@ -2,26 +2,19 @@
 import { useState } from 'react'
 import './ToDoForm.scss'
 import {v4 as uuidv4} from 'uuid';
+import { ToDoFormProps } from '../../Types/types';
 
 const defaultFormData = {
     title:'',
     description: '',
     completed:false
 }
-interface Task{
-    title: string;
-    description: string;
-    completed: boolean;
-    id: string;
-  }
 
-interface ToDoFormProps {
-    addTask: (param:Task) => void;
-}
 
 export default function ToDoForm({addTask}:ToDoFormProps){
+    //grabs the default form data and sets it as state
     const [toDoFormData, setToDoFormData] = useState(defaultFormData)
-
+    //updates the values of toDoFormData based on keystrokes inputs
     const onChangeToDo = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         setToDoFormData((prevValue) => ({
             ...prevValue,
@@ -30,14 +23,13 @@ export default function ToDoForm({addTask}:ToDoFormProps){
     }
 
     //grabs the toDoFormData and adds a unique id that is used in the functions in App.tsx
-    const submitToDo = (value: React.FormEvent<HTMLFormElement>) => {
-        value.preventDefault()
+    const submitToDo = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         const id = uuidv4()
         addTask({...toDoFormData, id:id })
         setToDoFormData(defaultFormData)
     }
     return(
-
             <div className='container'>   
                 <p className='todoTitle'>Add Task</p>
                 <form className='todoInputForm' onSubmit={submitToDo}>
