@@ -5,14 +5,14 @@ import { ToDoListProps } from '../../Types/types';
 
 
 
-export default function ToDoList({showModal,toDoList,deleteTask ,completeTask}:ToDoListProps){
+export default function ToDoList({showEditingModal,toDoList,deleteTask ,completeTask}:ToDoListProps){
 
     const toDoListItems = toDoList.map((item) => {
         return(
-            <ToDo key={item.id} showModal={showModal} completeTask={completeTask} deleteTask={deleteTask} title={item.title} description={item.description} id={item.id} completed={item.completed}/>
+            <ToDo key={item.id} showEditingModal={showEditingModal} completeTask={completeTask} deleteTask={deleteTask} title={item.title} description={item.description} id={item.id} completed={item.completed}/>
         )
-        
     })
+    
     return(
         <div className='containerToDoList'>
             <p className='todoTitle'>Tasks To Do</p>

@@ -10,53 +10,39 @@ import {Task} from './Types/types.ts'
 
 
 function App() {
-  const [showEditModal, setShowEditModal] = useState<boolean>(false);
   const [toDoList, setToDoList] = useState<Task[]>([]);
-  const [completedToDoList, setCompletedToDoList] = useState<Task[]>([]);
-  const [editModalTask, setEditModalTask] = useState<Task | undefined>();
+  const [editModalTask, setEditModalTask] = useState<Task | null>(null);
 
   //Show modal will bring up the editModal based on the id passed
-  //complete boolean is used to determine which dataset to grab the task from
-  const showModal = (taskId: string,complete: boolean): void => {
-    if(complete){
-      setEditModalTask(
-        completedToDoList.find((task) => task.id === taskId)
-      );
-    }else{  
-      setEditModalTask(
-        toDoList.find((task) => task.id === taskId)
-      );
+  const showEditingModal = (taskId: string): void => {
+    const taskToEdit = toDoList.find((task) => task.id === taskId)
+    //a fallback in case the task somehow does not exist
+    if(!taskToEdit){
+      console.error('Task Not Found')
+      setEditModalTask(null)
+      return
     }
-    setShowEditModal(true);
+    setEditModalTask(
+      taskToEdit
+    );
   };
 
+  //when the modal is hidden we need to reset the values of EditModalTask
   const hideModal = (): void => {
-    setShowEditModal(false);
+    setEditModalTask(null)
   };
 
   //editTask will update the specific task based on its id
-  //complete boolean is used to ensure it looks in the proper dataset to place the new object
-  const editTask = (updatedTask: Task,complete: boolean) => {
-    if(complete){
-      setCompletedToDoList(
-        completedToDoList.map((existingTask) => {
-          if (existingTask.id === updatedTask.id) {
-            return updatedTask;
-          }
-          return existingTask;
-        })
-      );
-    }else{
-      setToDoList(
-        toDoList.map((existingTask) => {
-          if (existingTask.id === updatedTask.id) {
-            return updatedTask;
-          }
-          return existingTask;
-        })
-      );
-    }
-    setShowEditModal(false);
+  const editTask = (updatedTask: Task) => {
+    setToDoList(
+      toDoList.map((existingTask) => {
+        if (existingTask.id === updatedTask.id) {
+          return updatedTask;
+        }
+        return existingTask;
+      })
+    );
+    setEditModalTask(null)
   };
 
   //adds a new task to the toDoList dataset
@@ -65,32 +51,23 @@ function App() {
   };
 
   //removes a speific task based on its id from the dataset
-  //complete boolean used to determine it is lookin in the proper dataset
-  const deleteTask = (taskId: string,complete: boolean) => {
-    if(complete){
-      setCompletedToDoList((prevValue) =>
+  const deleteTask = (taskId: string) => {
+    setToDoList((prevValue) =>
         prevValue.filter((existingTask) => existingTask.id != taskId)
-      );
-    }else{
-      setToDoList((prevValue) =>
-        prevValue.filter((existingTask) => existingTask.id != taskId)
-      );
-    }
+    );
   };
 
-  //this function moves a task object from toDoList to completedToDoList
-  //also removes the object it moves from toDoList
+  //this function updated the completed value of a specifc Task Object based on its taskId
   const completeTask = (taskId: string) => {
     const itemFound = toDoList.find((existingTask) => existingTask.id === taskId)
     if(itemFound){
       itemFound.completed = true
-      setCompletedToDoList((prevValue) => [
-        itemFound,
-        ...prevValue
-      ])
-      setToDoList((prevValue) =>
-      prevValue.filter((existingTask) => existingTask.id != taskId)
-      );
+      setToDoList(toDoList.map((existingTask) => {
+        if (existingTask.id === itemFound.id) {
+          return itemFound;
+        }
+        return existingTask;
+      }))
     }
   }
 
@@ -100,35 +77,35 @@ function App() {
       <div className="toDoAppContainer">
         <ToDoForm addTask={addTask} />
         <div className="toDoAppContainerLists">
-          {toDoList.length === 0 && completedToDoList.length === 0 ? (
+          {toDoList.length === 0 ? (
             <h2 className="noTasks">
               You have no tasks currently, add a task so they will show up
               here
             </h2>):(
             <>
               <ToDoList
-              showModal={showModal}
+              showEditingModal={showEditingModal}
               deleteTask={deleteTask}
               completeTask={completeTask}
-              toDoList={toDoList}/>
+              toDoList={toDoList.filter((task) => task.completed != true)}/>
               <ToDoListComplete
-              showModal={showModal}
+              showEditingModal={showEditingModal}
               completeTask={completeTask}
               deleteTask={deleteTask}
-              completedToDoList={completedToDoList}/>
+              completedToDoList={toDoList.filter((task) => task.completed === true)}/>
             </>)}
         </div>
       </div>
       {editModalTask && (
         <Rodal
-          visible={showEditModal}
+          visible={!!editModalTask}
           animation="slideUp"
           onClose={hideModal}
           height={260}
           width={360}
           customStyles={{ "borderRadius": "2rem" }}>
           <ToDoEditModal
-            setEditModalTask={editModalTask}
+            editModalTask={editModalTask}
             editTask={editTask}/>
         </Rodal>
       )}
